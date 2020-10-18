@@ -14,7 +14,7 @@ from scipy.sparse import coo_matrix
 # Collectively worked by all the Group Members
 # Structure of the project and Control Flow by Hithesh
 # Word Info Generation by Dilip
-# Feature Extraction and Core Logic by Alexandra
+# Feature Extraction and Core Logic by Alexandra - Main Reference: https://medium.com/analytics-vidhya/automated-keyword-extraction-from-articles-using-nlp-bfd864f41b34
 
 
 # Hithesh
