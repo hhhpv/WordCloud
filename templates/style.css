@@ -1,0 +1,117 @@
+body, html{
+  margin: 0;
+  padding: 0;
+}
+
+#word-cloud{
+  margin-top:1em;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: cadetblue;
+}
+
+.navbar-brand{
+  font-family: 'Satisfy',cursive;
+}
+.loading {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,.5);
+}
+.loading-wheel {
+  width: 20px;
+  height: 20px;
+  margin-top: -40px;
+  margin-left: -40px;
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+  border-width: 30px;
+  border-radius: 50%;
+  -webkit-animation: spin 1s linear infinite;
+}
+.style-2 .loading-wheel {
+  border-style: double;
+  border-color: #ccc transparent;
+}
+@-webkit-keyframes spin {
+  0% {
+      -webkit-transform: rotate(0);
+  }
+  100% {
+      -webkit-transform: rotate(-360deg);
+  }
+}
+
+/* tooltip design */
+div.mytooltip {
+  text-decoration: none;
+}
+div.mytooltip:hover {
+  cursor:help;
+  position: relative;
+  
+}
+
+
+/* The Modal (background) */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 0px 16px;
+  background-color:gray;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 0px 10px;
+  background-color: gray;
+  color: white;
+}

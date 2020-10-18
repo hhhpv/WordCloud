@@ -1,0 +1,228 @@
+{% load static %}
+
+<html>
+
+<head>
+    <!-- Load Required Imports  -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Satisfy">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@200&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+
+<body onload="change_mode()">
+    <!-- Dilip -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand mx-auto" href="#">Word Cloud</a>
+    </nav>
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 1em;">
+            <div class="col" style="text-align: center;margin-top: 5%">
+                <form style="text-align: center;margin-top: 15%">
+                    <div class="form-group">
+                        <!-- <label for="inputEmail" class="col-form-label"></label> -->
+                        <div class="col">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" id="topwords" class="btn btn-secondary"
+                                    onclick="selectType('top_words')">Top
+                                    Words</button>
+                                <button type="button" id="bigram" class="btn btn-secondary"
+                                    onclick="selectType('bi_grams')">Bi-gram</button>
+                                <button type="button" id="trigram" class="btn btn-secondary"
+                                    onclick="selectType('tri_gram')">Tri-gram</button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 15%;">
+                        <div style="text-align: center;">
+                            <div class="dropdown show">
+                                <label for="dropdownFontLink" class="col-form-label"></label>
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                    id="dropdownFontLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Select Font
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="fontSelect">
+                                    <a class="dropdown-item" href="#">Satisfy</a>
+                                    <a class="dropdown-item" href="#">Dancing Script</a>
+                                    <a class="dropdown-item" href="#">Commisioner</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 15%;">
+                        <label for="inputEmail" class="col"><strong><span style="font-size:x-large;">#</span>
+                                Words:</strong></label>
+                        <div class="col">
+                            <input id="slider" data-id='ex1RangePicker' type="range" min="45" max="75" data-step="1"
+                                data-value="45" />
+                            <span id="output">45</span>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+
+            <!-- Hithesh -->
+            <div class="col-6">
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content" id="myModalheader">
+                        <div class="close-btn">
+                            <span class="close">&times;</span>
+                        </div>
+                        <div style="text-align: center;color: white;font-size: xx-large;">
+                            <strong>Related Movie Titles</strong>
+                        </div>
+                        <div style="padding: 1%;"></div>
+                        <div style="text-align: center;color: white;font-size: x-large;">
+                            <strong>
+                                <div id="showing" style="float: left;">
+
+                                </div>
+                            </strong>
+                        </div>
+                        <div style="padding: 2%;"></div>
+                        <div class="w3-card">
+                            <div class="row">
+                                <div class="column" style="text-align: center;"><strong>&nbsp;&nbsp;Name</strong></div>
+                                <div class="column" style="text-align: center;"><strong> Year Of Release</strong></div>
+                                <div class="column" style="text-align: center;">Wiki <i class="fa fa-globe"
+                                        aria-hidden="true"></i></div>
+                            </div>
+                        </div>
+                        <div id="movieList" class="modal-body">
+                            <!-- Div To Fill the Movie List -->
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <!-- Hithesh
+                Word Cloud Canvas -->
+                <div id="word-cloud" style="height: 500px;border:15px;border-color: black;">
+
+                </div>
+
+
+
+                <!-- Dilip -->
+                <div style="margin-top: 1em;">
+                    <button type="button" onclick="change_mode()" class="btn btn-secondary" style="width:100%"><span
+                            style="font-size: x-large;"><strong>Generate</strong></span><span
+                            style="float: right;padding-top:0.5%;" class="material-icons">
+                            settings
+                        </span></button>
+                </div>
+
+            </div>
+
+            <!-- Dilip -->
+            <div class="col" style="text-align: center;margin-top: 5%">
+                <form>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col col-form-label"><strong>Decade</strong></label>
+                        <div class="col">
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                    id="dropdownYearLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    1910-1920
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="yearSelect">
+                                    <a class="dropdown-item" href="#">1900-1910</a>
+                                    <a class="dropdown-item" href="#">1910-1920</a>
+                                    <a class="dropdown-item" href="#">1920-1930</a>
+                                    <a class="dropdown-item" href="#">1930-1940</a>
+                                    <a class="dropdown-item" href="#">1940-1950</a>
+                                    <a class="dropdown-item" href="#">1950-1960</a>
+                                    <a class="dropdown-item" href="#">1960-1970</a>
+                                    <a class="dropdown-item" href="#">1970-1980</a>
+                                    <a class="dropdown-item" href="#">1980-1990</a>
+                                    <a class="dropdown-item" href="#">1990-2000</a>
+                                    <a class="dropdown-item" href="#">2000-2010</a>
+                                    <a class="dropdown-item" href="#">2010-2020</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="col col-form-label"><strong>Genre</strong></label>
+                        <div class="col" style="padding: 2%;">
+                            <div class="dropdown show">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                                    id="dropdownGenreLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Sci-Fi
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="genreSelect">
+                                    <a class="dropdown-item" href="#">Sci-Fi</a>
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Drama</a>
+                                    <a class="dropdown-item" href="#">Comedy</a>
+                                    <a class="dropdown-item" href="#">Biography</a>
+                                    <a class="dropdown-item" href="#">Adventure</a>
+                                    <a class="dropdown-item" href="#">Romance</a>
+                                    <a class="dropdown-item" href="#">Musical</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding:0.5em;margin-top: 20%">
+                        <div class="alert alert-secondary alert-dismissible fade show" style="font-size: smaller;">
+                            <i class="fa fa-info-circle" aria-hidden="true" style="float: left;"></i><span
+                                style="padding: 0.5%;"></span>
+                            <strong>Bigram</strong>
+                            A bigram is a sequence of two adjacent elements from a string of tokens, which are
+                            typically
+                            letters, syllables, or words. A bigram is an n-gram for n=2.
+
+                        </div>
+                        <div class="alert alert-secondary alert-dismissible fade show" style="font-size: smaller;">
+                            <i class="fa fa-info-circle" aria-hidden="true" style="float: left;"></i><span
+                                style="padding: 0.5%;"></span>
+                            <strong>Trigram</strong>
+                            A trigram is a sequence of three adjacent elements from a string of tokens, which are
+                            typically letters, syllables, or words. A trigram is an n-gram for n=3.
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dilip -->
+    <div id="loader" class="loading style-2">
+        <div class="loading-wheel"></div>
+    </div>
+</body>
+
+<!-- Open the javascript file for more details. -->
+<script type="text/javascript" src="{% static 'css/cloudScript.js' %}"></script>
+
+</html>
