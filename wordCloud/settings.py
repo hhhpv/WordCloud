@@ -122,8 +122,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 # Hithesh
 STATIC_URL = "/static/"
-STATICFILES_DIRS = (
-    os.path.join(os.path.dirname(__file__), "static/style.css").replace("\\", " / "),
-    os.path.join(BASE_DIR, "static"),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 django_heroku.settings(locals())
