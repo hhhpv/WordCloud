@@ -27,7 +27,8 @@ def index(request):
 @csrf_exempt
 def generate(request):
 
-    data = json.load(request.body)
+    # data = json.loads(request.body)
+    data = request.body
     print(request.body)
     mappings = None
     with open("mappings.txt", "r") as rfile:
