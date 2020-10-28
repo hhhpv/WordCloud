@@ -30,7 +30,7 @@ def generate(request):
     # return HttpResponse(request.content)
     data = json.loads(request.body)
     # data = request.body
-    print(request.body)
+    # print(request.body)
     mappings = None
     with open("mappings.txt", "r") as rfile:
         mappings = json.load(rfile)
