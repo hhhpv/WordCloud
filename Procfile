@@ -1,1 +1,1 @@
-web: gunicorn wordCloud.wsgi
+web: gunicorn wordCloud.wsgi --log-file -

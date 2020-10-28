@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 import django_heroku
 
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
@@ -28,7 +29,7 @@ SECRET_KEY = "7bwvda^qmvm9xb*bts8m-s6+55vx***xkx%2h5)bq_+37!3a^w"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 CSRF_COOKIE_SECURE = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [*]
 
 
 # Application definition
@@ -77,13 +78,19 @@ WSGI_APPLICATION = "wordCloud.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'ciba',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
