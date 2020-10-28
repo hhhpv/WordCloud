@@ -28,7 +28,7 @@ def index(request):
 def generate(request):
 
     # return HttpResponse(request.content)
-    data = json.loads(request.content)
+    data = json.loads(request.body)
     # data = request.body
     print(request.body)
     mappings = None
