@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
 
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -125,3 +126,4 @@ STATICFILES_DIRS = (
     os.path.join(os.path.dirname(__file__), "static/style.css").replace("\\", " / "),
     os.path.join(BASE_DIR, "static"),
 )
+django_heroku.settings(locals())
